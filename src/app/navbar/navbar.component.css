@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d3557;
+    padding: 1rem 2rem;
+    color: white;
+  }
+  
+  .nav-left a {
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: bold;
+  }
+  
+  .nav-left a.active {
+    border-bottom: 2px solid #f1faee;
+  }
+  
+  .nav-right button {
+    background-color: #e63946;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .nav-right button:hover {
+    background-color: #d62839;
+  }

@@ -1,0 +1,89 @@
+
+.dashboard-card {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #f9f9f9;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .dashboard-image-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .initials-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #6c757d;  
+    color: white;               
+    font-weight: bold;
+    font-size: 36px;            
+    display: flex;
+    align-items: center;       
+    justify-content: center;  
+    text-transform: uppercase; 
+  }
+  
+  .dashboard-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+  }
+  
+  .dashboard-info div {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .dashboard-info strong {
+    color: #222;
+  }
+
+  .dashboard-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .edit-button,
+  .save-button,
+  .cancel-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover,
+  .save-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cancel-button {
+    background-color: #6c757d;
+  }
+  
+  .cancel-button:hover {
+    background-color: #5a6268;
+  }
+  
