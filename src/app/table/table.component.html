@@ -1,18 +1,19 @@
 <app-navbar></app-navbar>
 
-
 <div class="user-table-container">
   <h2 class="table-title">User List</h2>
   <div class="table-wrapper">
     <table class="styled-table">
       <thead>
         <tr>
+          <th>Profile</th>
           <th>Name</th>
           <th>Email</th>
           <th>DOB</th>
           <th>Gender</th>
           <th>Contact</th>
           <th>Address</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +41,10 @@
           <td>{{ user.contactNumber }}</td>
           <td>{{ user.address }}</td>
           <td>
-            <button (click)="viewProfile(user)">View Profile</button>
+            <div class="action-buttons">
+              <button class="view-btn" (click)="viewProfile(user)">View</button>
+              <button class="delete-btn" (click)="deleteUser(user.id)">Delete</button>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -56,5 +60,3 @@
     </button>
   </div>
 </div>
-
-  

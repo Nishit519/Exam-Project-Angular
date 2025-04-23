@@ -27,6 +27,10 @@
       <input *ngIf="editMode" [(ngModel)]="userData.name" />
     </div>
 
+    <div><strong>Access Role:</strong>
+      <span *ngIf="!editMode">{{ userData.role }}</span>
+    </div>
+
     <div><strong>Date of Birth:</strong>
       <span *ngIf="!editMode">{{ userData.dob }}</span>
       <input *ngIf="editMode" [(ngModel)]="userData.dob" type="date" />

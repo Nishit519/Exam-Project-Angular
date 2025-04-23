@@ -42,6 +42,10 @@ export class UserService {
     return this.http.get<any>(url); 
   }
 
+  deleteUser(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`http://localhost:8080/delete-user/${id}`);
+  }
+
   updateUserData(adminUser: any, imageFile: File): Observable<boolean> {
     
     const formData = new FormData();
