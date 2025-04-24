@@ -14,8 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'aZ1xR7nVf4GqL9dPbWmYcT6jHsEUkO38iJNtK5BAzvCeMyXoFDQrlpSghuZwNbRXatqVYEo7cdkpLwzTmUAgKHnFJbsiQ93vGRyLmCXeWtuqOASBxMkPnfhaVjTcLdUboqNRYmgtZKXeWJVCHQyxLiDGnUfoP2vM9zsekl8BpLtRYKhN',
-    component: ResetPasswordComponent,
-    canActivate: [AuthGuard]
+    component: ResetPasswordComponent
   }
   
 ];

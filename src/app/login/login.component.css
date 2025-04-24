@@ -1,4 +1,5 @@
 .login-container {
+  position: relative; /* Required for z-index to apply */
   max-width: 400px;
   margin: 50px auto;
   padding: 35px 30px;
@@ -6,8 +7,10 @@
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
   font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  z-index: 10;
 }
 
+/* Title */
 h2 {
   text-align: center;
   margin-bottom: 28px;
@@ -16,6 +19,7 @@ h2 {
   font-weight: 600;
 }
 
+/* Form elements */
 .form-group {
   margin-bottom: 20px;
 }
@@ -28,13 +32,27 @@ label {
   margin-bottom: 8px;
 }
 
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px; /* slightly reduced */
+  font-size: 15px;
+  color: #444;
+  font-weight: 500;
+}
+
 .form-control {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px; /* reduced padding for better alignment */
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
   background-color: #fafafa;
+  box-sizing: border-box; /* ensures padding doesn't overflow */
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -55,6 +73,7 @@ label {
   margin-top: 5px;
 }
 
+/* Submit Button */
 button[type="submit"] {
   width: 100%;
   padding: 12px;
@@ -77,6 +96,7 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
+/* Forgot password */
 .forgot-password {
   text-align: right;
   margin-top: 14px;
@@ -96,3 +116,53 @@ button[type="submit"]:disabled {
   color: #0056b3;
   text-decoration: underline;
 }
+
+/* Animation background */
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  background: #4e54c8;
+  overflow: hidden;
+  z-index: -1; /* Push behind everything */
+}
+
+.background li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  animation: animate 13s linear infinite;
+  z-index: -1; /* Stay behind */
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+
+/* Individual li styling (unchanged) */
+.background li:nth-child(0) { left: 56%; width: 108px; height: 108px; bottom: -108px; animation-delay: 1s; }
+.background li:nth-child(1) { left: 74%; width: 118px; height: 118px; bottom: -118px; animation-delay: 5s; }
+.background li:nth-child(2) { left: 82%; width: 189px; height: 189px; bottom: -189px; animation-delay: 2s; }
+.background li:nth-child(3) { left: 56%; width: 100px; height: 100px; bottom: -100px; animation-delay: 11s; }
+.background li:nth-child(4) { left: 16%; width: 197px; height: 197px; bottom: -197px; animation-delay: 7s; }
+.background li:nth-child(5) { left: 77%; width: 156px; height: 156px; bottom: -156px; animation-delay: 19s; }
+.background li:nth-child(6) { left: 68%; width: 184px; height: 184px; bottom: -184px; animation-delay: 7s; }
+.background li:nth-child(7) { left: 46%; width: 118px; height: 118px; bottom: -118px; animation-delay: 31s; }
+.background li:nth-child(8) { left: 49%; width: 149px; height: 149px; bottom: -149px; animation-delay: 25s; }
+.background li:nth-child(9) { left: 33%; width: 110px; height: 110px; bottom: -110px; animation-delay: 29s; }
