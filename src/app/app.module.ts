@@ -12,6 +12,11 @@ import { TableComponent } from './table/table.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     DashboardComponent,
     TableComponent,
     NavbarComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ForgotPasswordDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +34,10 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     ReactiveFormsModule,
     FormsModule,
     NgxCaptchaModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     HttpClientModule
   ],
   providers: [

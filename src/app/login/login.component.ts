@@ -2,6 +2,8 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, LoginRequest } from '../auth.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ForgotPasswordDialogComponent } from '../forgot-password-dialog/forgot-password-dialog.component';
 
 declare global {
   interface Window {
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit{
   captchaToken: string | null = null; // ⬅️ store the captcha token
 
   constructor(
+    private dialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
@@ -78,23 +81,24 @@ export class LoginComponent implements OnInit{
       alert("Please complete the CAPTCHA first.");
       return;
     }
-
-    const emailControl = this.loginForm.get('email');
-    if (!emailControl || emailControl.invalid) {
-      emailControl?.markAsTouched();
-      alert("Please enter a valid email before requesting password reset.");
-      return;
-    }
-
-    const email = emailControl.value;
-    this.authService.sendResetPasswordEmail(email).subscribe({
-      next: (response) => {
-        alert("Password reset email sent successfully. Please check your inbox.");
-        console.log("Reset email sent:", response);
-      },
-      error: (error) => {
-        console.error("Error sending reset email:", error);
-        alert("Failed to send password reset email. Please try again.");
+  
+    const email = this.loginForm.get('email')?.value || '';
+  
+    const dialogRef = this.dialog.open(ForgotPasswordDialogComponent, {
+      width: '400px',
+      data: { email }
+    });
+  
+    dialogRef.afterClosed().subscribe((result: string | undefined) => {
+      if (result) {
+        this.authService.sendResetPasswordEmail(result).subscribe({
+          next: () => {
+            alert("Password reset email sent. Please check your inbox.");
+          },
+          error: () => {
+            alert("Failed to send password reset email. Try again.");
+          }
+        });
       }
     });
   }
