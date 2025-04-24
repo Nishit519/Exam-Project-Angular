@@ -64,12 +64,27 @@
     </table>
   </div>
 
+  <!-- Pagination Controls -->
   <div class="pagination-wrapper">
+    <button (click)="prevPage()" [disabled]="page === 0">Prev</button>
+
     <button 
       *ngFor="let p of [].constructor(totalPages); let i = index"
       (click)="goToPage(i)"
       [class.active]="i === page">
       {{ i + 1 }}
     </button>
+
+    <button (click)="nextPage()" [disabled]="page + 1 >= totalPages">Next</button>
+
+    <div class="page-size-selector">
+      <label for="size">Show:</label>
+      <select id="size" [(ngModel)]="size" (change)="onPageSizeChange()">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="50">50</option>
+      </select>
+      <span>entries (Total: {{ totalElements }})</span>
+    </div>
   </div>
-</div>

@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   page = 0;
   size = 10;
   totalPages = 0;
+  totalElements = 0;
   searchQuery: string = '';
 
   constructor(private router : Router, private userService: UserService) {}
@@ -32,6 +33,7 @@ export class TableComponent implements OnInit {
       next: (res: UserPageResponse) => {
         this.users = res.content;
         this.totalPages = res.totalPages;
+        this.totalElements = res.totalElements;
       },
       error: (err) => console.error('Error loading users:', err)
     });
@@ -73,6 +75,25 @@ export class TableComponent implements OnInit {
 
   goToPage(pageNum: number): void {
     this.page = pageNum;
+    this.loadUsers();
+  }
+
+  nextPage(): void {
+    if (this.page + 1 < this.totalPages) {
+      this.page++;
+      this.loadUsers();
+    }
+  }
+
+  prevPage(): void {
+    if (this.page > 0) {
+      this.page--;
+      this.loadUsers();
+    }
+  }
+
+  onPageSizeChange(): void {
+    this.page = 0;
     this.loadUsers();
   }
 }
