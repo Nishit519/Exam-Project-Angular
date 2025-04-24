@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User, UserPageResponse } from '../user.service'; 
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: false,
@@ -15,7 +15,7 @@ export class TableComponent implements OnInit {
   size = 10;
   totalPages = 0;
 
-  constructor(private userService: UserService) {}
+  constructor(private router : Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.loadUsers();
@@ -37,11 +37,26 @@ export class TableComponent implements OnInit {
   }
 
   viewProfile(user: User): void {
-    // Example: Navigate to a profile view page with the user's ID
-    
+    this.router.navigate(['/dashboard', user.email]);
+  }
 
-    // Or, if you want to log the user data instead
-    // console.log('Viewing profile for:', user);
+  deleteUser(id: number): void {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser(id).subscribe({
+        next: (res) => {
+          if (res) {
+            alert('User deleted successfully.');
+            this.loadUsers(); // refresh the table
+          } else {
+            alert('Failed to delete user.');
+          }
+        },
+        error: (err) => {
+          console.error('Error deleting user:', err);
+          alert('An error occurred while deleting the user.');
+        }
+      });
+    }
   }
 
   getUserInitials(name: string): string {

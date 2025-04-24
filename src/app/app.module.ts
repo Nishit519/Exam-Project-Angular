@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { TableComponent } from './table/table.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     DashboardComponent,
     TableComponent,
-    NavbarComponent
+    NavbarComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxCaptchaModule,
     HttpClientModule
   ],
   providers: [

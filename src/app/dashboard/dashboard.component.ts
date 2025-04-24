@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service'; 
 import { User } from '../user.service'; 
 
@@ -15,9 +16,11 @@ export class DashboardComponent implements OnInit {
   selectedImageFile: File | null = null;
   editMode = false;
   private isBrowser: boolean;
+  email: string | null = null;
 
   constructor(
     private userService: UserService,
+    private route: ActivatedRoute,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -25,13 +28,20 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.isBrowser) return;
-    this.loadUserDataInBrowser();
+
+    this.route.paramMap.subscribe(params => {
+      this.email = params.get('email');
+      if (this.email) {
+        this.loadUserData(this.email);
+      } else {
+        this.email = localStorage.getItem('email')
+        this.loadUserData(this.email!);
+      }
+    });
+
   }
 
-  private loadUserDataInBrowser(): void {
-    const email = localStorage.getItem('email');
-    if (!email) return;
-
+  private loadUserData(email: string): void {
     this.userService.getUserData(email).subscribe({
       next: (data) => {
         this.userData = { ...data };
@@ -47,14 +57,14 @@ export class DashboardComponent implements OnInit {
     return names.map(n => n[0]).join('').toUpperCase().slice(0, 2);
   }
 
-onImageSelected(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (input.files && input.files.length > 0) {
-    this.selectedImageFile = input.files[0];
-  } else {
-    this.selectedImageFile = null;
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImageFile = input.files[0];
+    } else {
+      this.selectedImageFile = null;
+    }
   }
-}
 
   saveUserData() {
     if (!this.userData) return;
@@ -63,14 +73,11 @@ onImageSelected(event: Event): void {
       next: () => {
         this.editMode = false;
         this.selectedImageFile = null;
-        this.loadUserDataInBrowser(); // Reload updated data
+        this.loadUserData(this.email!); // Reload updated data
       },
       error: (err) => console.error('Failed to update user data:', err)
     });
   }
-
-
-
 
   cancelEdit() {
     this.editMode = false;
