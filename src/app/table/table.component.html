@@ -1,6 +1,19 @@
 <app-navbar></app-navbar>
 
 <div class="user-table-container">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <div class="search-wrapper">
+      <i class="fas fa-search search-icon"></i>
+      <input 
+        type="text" 
+        placeholder="Search by name or email..." 
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+      />
+    </div>
+  </div>
+  
   <h2 class="table-title">User List</h2>
   <div class="table-wrapper">
     <table class="styled-table">

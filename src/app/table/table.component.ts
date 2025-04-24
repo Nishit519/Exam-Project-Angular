@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   page = 0;
   size = 10;
   totalPages = 0;
+  searchQuery: string = '';
 
   constructor(private router : Router, private userService: UserService) {}
 
@@ -21,8 +22,13 @@ export class TableComponent implements OnInit {
     this.loadUsers();
   }
 
+  onSearch(): void {
+  this.page = 0; // reset to first page
+  this.loadUsers();
+}
+
   loadUsers(): void {
-    this.userService.getUserTable(this.page, this.size).subscribe({
+    this.userService.getUserTable(this.page, this.size, this.searchQuery).subscribe({
       next: (res: UserPageResponse) => {
         this.users = res.content;
         this.totalPages = res.totalPages;
