@@ -17,16 +17,16 @@ export class TableComponent implements OnInit {
   totalElements = 0;
   searchQuery: string = '';
 
-  constructor(private router : Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.loadUsers();
   }
 
   onSearch(): void {
-  this.page = 0; // reset to first page
-  this.loadUsers();
-}
+    this.page = 0; // reset to first page
+    this.loadUsers();
+  }
 
   loadUsers(): void {
     this.userService.getUserTable(this.page, this.size, this.searchQuery).subscribe({
@@ -38,7 +38,22 @@ export class TableComponent implements OnInit {
       error: (err) => console.error('Error loading users:', err)
     });
   }
-  
+
+  downloadExcel(): void {
+    this.userService.downloadUserInformationExcel().subscribe({
+      next: (response) => {
+        // Create a Blob from the Excel data
+        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        // Create an anchor element to trigger download
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'user-information.xlsx';
+        link.click();
+      },
+      error: (err) => console.error('Error downloading Excel file:', err)
+    });
+  }
+
   isValidBase64(image: string): boolean {
     const base64Pattern = /^data:image\/(png|jpeg|jpg|gif);base64,/;
     return base64Pattern.test(image);

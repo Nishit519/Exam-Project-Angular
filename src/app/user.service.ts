@@ -65,4 +65,10 @@ export class UserService {
     return this.http.put<boolean>('http://localhost:8080/update-user-data', formData);
   }
 
+  downloadUserInformationExcel(): Observable<Blob> {
+    return this.http.get(`http://localhost:8080/download-user-information-excel`, {
+      responseType: 'blob'
+    });
+  }
+
 }
